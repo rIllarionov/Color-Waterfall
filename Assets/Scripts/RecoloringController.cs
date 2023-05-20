@@ -11,12 +11,13 @@ public class RecoloringController : MonoBehaviour
     private Recoloring [] _cubes; //массив всех объектов умеющих перекрашиваться у родителя
     public void StartRecoloring()
     {
-        
-        GetRecoloringObjects(); //ищем все объекты способные перекрашиваться у родителя
-        StartCoroutine(StartER());//запускаем корутину
+        if (_cubes!=null)
+        {
+            StartCoroutine(StartER());//запускаем корутину
+        }
     }
     
-    private void GetRecoloringObjects()
+    public void GetRecoloringObjects()
     {
         _cubes = _parent.GetComponentsInChildren<Recoloring>();//нашли и записали в массив
     }

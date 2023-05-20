@@ -2,18 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CubeSpawner : MonoBehaviour
 {
+
+    [SerializeField] private RecoloringController _recoloringController;//ссылка на перекрашиватель
+    public UnityEvent AllCubeSpawned;//событие 
+    
     [SerializeField] private GameObject _prefab;
     [SerializeField] private Transform _parent;
     [SerializeField] private float _timePerSpawn;
     
-    private List<GameObject> _cubes;//используем для хранения всех заспавненых кубов
-
     private void Awake()
     {
-        _cubes = new List<GameObject>();
+        AllCubeSpawned.AddListener(_recoloringController.GetRecoloringObjects);//подписываемся на метод по сбору детишек
     }
 
     void Start()
@@ -28,15 +31,11 @@ public class CubeSpawner : MonoBehaviour
             for (int j = 0; j < 20; j++)
             {
                 var spawnPossition = new Vector3(j, 0.4f, i);
-                _cubes.Add(Instantiate(_prefab,spawnPossition, Quaternion.identity,_parent));
+                Instantiate(_prefab,spawnPossition, Quaternion.identity,_parent);
                 yield return new WaitForSeconds(_timePerSpawn);
             }
         }
-        
+        AllCubeSpawned.Invoke();//когда все кубы заспавнились вызываем метод.
     }
     
-    public List<GameObject> GetCubesArray()
-    {
-        return _cubes;
-    }
 }

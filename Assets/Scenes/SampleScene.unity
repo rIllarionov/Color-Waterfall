@@ -699,6 +699,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b2387996d854b77817d7daa4fdbcb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoloringController: {fileID: 901603912}
+  AllCubeSpawned:
+    m_PersistentCalls:
+      m_Calls: []
   _prefab: {fileID: 5407069859400954335, guid: 3e177d1923e964b01ac2535243f0d720, type: 3}
   _parent: {fileID: 901603914}
   _timePerSpawn: 0.04
